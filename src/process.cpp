@@ -18,10 +18,7 @@ int Process::Pid() {
 
 // TODO: Return this process's CPU utilization
 float Process::CpuUtilization() {
-    long active_jiffies = LinuxParser::ActiveJiffies(pid);
-    long starttime = LinuxParser::UpTime(pid);
-    long uptime = LinuxParser::UpTime();
-    return active_jiffies / (uptime - starttime);
+    return uti;
 }
 
 // TODO: Return the command that generated this process

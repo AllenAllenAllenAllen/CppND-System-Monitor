@@ -24,11 +24,15 @@ vector<Process>& System::Processes() {
     for (int i : pids) {
         string user = LinuxParser::User(i);
         string command = LinuxParser::Command(i);
-        string user = LinuxParser::Ram(i);
-        long uptime = LinuxParser::Uptime(i);
-        Process process(i, user, string command, string ram, uptime);
+        string ram = LinuxParser::Ram(i);
+        long uptime = LinuxParser::UpTime(i);
+        long active_jiffies = LinuxParser::ActiveJiffies(i);
+        long starttime = LinuxParser::UpTime(i);
+        float uti = active_jiffies / (uptime - starttime);
+        Process process(i, user, command, ram, uptime, uti);
         processes_.push_back(process);
     }
+    return processes_;
 }
 
 // TODO: Return the system's kernel identifier (string)
@@ -48,12 +52,12 @@ std::string System::OperatingSystem() {
 
 // TODO: Return the number of processes actively running on the system
 int System::RunningProcesses() {
-    return LinuxParser::RunningProcesses;
+    return LinuxParser::RunningProcesses();
 }
 
 // TODO: Return the total number of processes on the system
 int System::TotalProcesses() {
-    return LinuxParser::TotalProcesses;
+    return LinuxParser::TotalProcesses();
 }
 
 // TODO: Return the number of seconds since the system started running
