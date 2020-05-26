@@ -249,7 +249,7 @@ string LinuxParser::Uid(int pid) {
       std::istringstream linestream(line);
       string key, value;
       linestream >> key;
-      if (key == "UID:") {
+      if (key == "Uid:") {
         while (linestream >> value) {
           if (std::all_of(value.begin(), value.end(), isdigit)) {
             break;
@@ -286,7 +286,7 @@ string LinuxParser::User(int pid) {
 // TODO: Read and return the uptime of a process
 // REMOVE: [[maybe_unused]] once you define the function
 long LinuxParser::UpTime(int pid) {
-  std::ifstream stream(kProcDirectory + to_string(pid) + kStatusFilename);
+  std::ifstream stream(kProcDirectory + to_string(pid) + kStatFilename);
   if (stream.is_open()) {
     string line;
     std::getline(stream, line);

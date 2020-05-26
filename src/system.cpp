@@ -25,10 +25,10 @@ vector<Process>& System::Processes() {
         string user = LinuxParser::User(i);
         string command = LinuxParser::Command(i);
         string ram = LinuxParser::Ram(i);
-        long uptime = LinuxParser::UpTime(i);
+        long uptime = LinuxParser::UpTime();
         long active_jiffies = LinuxParser::ActiveJiffies(i);
         long starttime = LinuxParser::UpTime(i);
-        float uti = active_jiffies / (uptime - starttime);
+        float uti = active_jiffies * 1.0 / (uptime - starttime);
         Process process(i, user, command, ram, uptime, uti);
         processes_.push_back(process);
     }
