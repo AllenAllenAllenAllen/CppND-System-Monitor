@@ -81,9 +81,9 @@ float LinuxParser::MemoryUtilization() {
           break;
         }
       }
-      if (key == "MemTotal") {
+      if (key == "MemTotal:") {
         mem_total = stoi(value);
-        } else if (key == "MemFree") {
+      } else if (key == "MemFree:") {
         mem_free = stoi(value);
         break;
       }

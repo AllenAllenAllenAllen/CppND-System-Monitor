@@ -10,7 +10,7 @@ float Processor::Utilization() {
         return 0;
     }
     long active_diff = active_jiffies - this->active_jiffies;
-    long uti = active_diff / jiffies_diff;
+    float uti = active_diff * 1.0 / jiffies_diff;
     this->active_jiffies = active_jiffies;
     this->jiffies = jiffies;
     return uti;
