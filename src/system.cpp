@@ -32,6 +32,7 @@ vector<Process>& System::Processes() {
         Process process(i, user, command, ram, uptime, uti);
         processes_.push_back(process);
     }
+    sort(processes_.begin(), processes_.end());
     return processes_;
 }
 

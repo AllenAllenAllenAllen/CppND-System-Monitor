@@ -129,7 +129,7 @@ long LinuxParser::ActiveJiffies(int pid) {
     string utime, stime;
     linestream >> utime;
     linestream >> stime;
-    return (std::stol(utime) + std::stol(stime)) / sysconf(_SC_CLK_TCK);
+    return (stol(utime) + stol(stime)) / sysconf(_SC_CLK_TCK);
   }
   return 0;
 }
