@@ -21,15 +21,15 @@ Processor& System::Cpu() { return cpu_; }
 vector<Process>& System::Processes() {
     processes_.clear();
     vector<int> pids = LinuxParser::Pids();
+    long uptime = LinuxParser::UpTime();
     for (int i : pids) {
         string user = LinuxParser::User(i);
         string command = LinuxParser::Command(i);
         string ram = LinuxParser::Ram(i);
-        long uptime = LinuxParser::UpTime();
         long active_jiffies = LinuxParser::ActiveJiffies(i);
         long starttime = LinuxParser::UpTime(i);
         float uti = active_jiffies * 1.0 / (uptime - starttime);
-        Process process(i, user, command, ram, uptime, uti);
+        Process process(i, user, command, ram, uptime - starttime, uti);
         processes_.push_back(process);
     }
     sort(processes_.begin(), processes_.end());
